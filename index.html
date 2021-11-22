@@ -6,6 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lab 9</title>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "523aa802e115444cbcd93112b35ee4b7",
+      application: "lab9"
+    });
+  </script>
+                        
 
   <style>
     button {
@@ -102,6 +110,123 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    TrackJS.track('error');
+    let consoleLog = errorBtns[0];
+    consoleLog.addEventListener('click', e => {
+      let output = document.querySelector('output');
+      console.log(output.innerHTML);
+    });
+
+    let consoleError = errorBtns[1];
+    consoleError.addEventListener('click', e => {
+      console.error('Wrong calculations');
+    });
+
+    let consoleCount = errorBtns[2];
+    consoleCount.addEventListener('click', e => {
+      console.count('output');
+    });
+
+    let consoleWarn = errorBtns[3];
+    consoleWarn.addEventListener('click', e => {
+      console.warn('Careful');
+    });
+
+    let consoleAssert = errorBtns[4];
+    consoleAssert.addEventListener('click', e => {
+      let output = document.querySelector('output');
+      console.assert(output.innerHTML == 1, 'Output not 1');
+    });
+
+    let consoleClear = errorBtns[5];
+    consoleClear.addEventListener('click', e => {
+      console.clear();
+    })
+
+    let consoleDir = errorBtns[6];
+    consoleDir.addEventListener('click', e => {
+      console.dir(document.head);
+    });
+
+    let consoleDirxml = errorBtns[7];
+    consoleDirxml.addEventListener('click', e => {
+      console.dirxml(document);
+    });
+
+    let consoleGroupStart = errorBtns[8];
+    consoleGroupStart.addEventListener('click', e => {
+      console.group('Test Group');
+    });
+
+    let consoleGroupEnd = errorBtns[9];
+    consoleGroupEnd.addEventListener('click', e => {
+      console.groupEnd('Test Group');
+    })
+
+    let consoleTable = errorBtns[10];
+    consoleTable.addEventListener('click', e => {
+      console.table([
+        {
+          a: '1',
+          b: '2',
+        },
+        {
+          a: '2',
+          b: '3',
+          c: '4'
+        }
+      ]);
+    });
+
+    let consoleStartTimer = errorBtns[11];
+    consoleStartTimer.addEventListener('click', e => {
+      console.time();
+    });
+
+    let consoleEndTimer = errorBtns[12];
+    consoleEndTimer.addEventListener('click', e => {
+      console.timeEnd();
+    });
+
+    let consoleTrace = errorBtns[13];
+    consoleTrace.addEventListener('click', e => {
+      const a = () => { b(); };
+      const b = () => { console.trace(); };
+      a();
+    });
+
+    let globalError = errorBtns[14];
+    globalError.addEventListener('click', e => {
+      TrackJS.track('Testing');
+    });
+
+    class IntError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "IntError";
+      }
+    }
+
+    let firstNum = document.querySelector('#first-num');
+    let secondNum = document.querySelector('#second-num');
+    form.addEventListener('submit', e => {
+      try {
+        eval(firstNum.value + 1);
+        if(!(Number.isInteger(secondNum.value / 1))) {
+          throw new IntError("Second number is not an int");
+        }
+        if (!(Number.isInteger(firstNum.value / 1))) {
+          throw new Error("First number is not an integer");
+        }
+      } catch (err) {
+        alert(err.message);
+      }
+      finally {
+        console.log('Fill in second number');
+      }
+    });
+
+
   </script>
 </body>
 
